@@ -1,4 +1,4 @@
-# Solana Supply Chain Tracker
+# TraceChain (Solana Supply Chain Tracker)
 
 A real-time supply chain tracking DApp built on Solana with an Anchor smart contract, an IoT python simulator, and a Next.js frontend.
 
@@ -59,3 +59,4 @@ python simulator.py
 - QR Code Tracking: URLs with dynamic visualization.
 - Interactive Map: Uses Leaflet for GPS waypoint rendering.
 - Graphical Charts: Uses Recharts to map time-series telemetry.
+
