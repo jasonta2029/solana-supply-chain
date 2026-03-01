@@ -1,0 +1,27 @@
+[
+    {
+        "lat": 20.6597,
+        "lon": -103.3496,
+        "name": "Guadalajara, Jalisco"
+    },
+    {
+        "lat": 27.5036,
+        "lon": -99.5076,
+        "name": "Laredo, TX (Border Crossing)"
+    },
+    {
+        "lat": 35.4676,
+        "lon": -97.5164,
+        "name": "Oklahoma City, OK"
+    },
+    {
+        "lat": 39.0997,
+        "lon": -94.5786,
+        "name": "Kansas City, MO"
+    },
+    {
+        "lat": 41.8781,
+        "lon": -87.6298,
+        "name": "Chicago, IL"
+    }
+]
