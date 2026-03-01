@@ -7,7 +7,9 @@ import {
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
-    ReferenceLine
+    ReferenceLine,
+    AreaChart,
+    Area
 } from 'recharts';
 
 interface Reading {
@@ -24,57 +26,64 @@ interface ChartProps {
 
 export const TemperatureChart: React.FC<ChartProps> = ({ data, maxTemp, minTemp }) => {
     return (
-        <div className="h-72 w-full mt-4">
+        <div className="h-full w-full">
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart
+                <AreaChart
                     data={data}
                     margin={{
-                        top: 5,
-                        right: 20,
-                        left: 0,
-                        bottom: 5,
+                        top: 20,
+                        right: 10,
+                        left: -20,
+                        bottom: 0,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#2a2e38" />
+                    <defs>
+                        <linearGradient id="colorTemp" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#0052FF" stopOpacity={0.1} />
+                            <stop offset="95%" stopColor="#0052FF" stopOpacity={0} />
+                        </linearGradient>
+                    </defs>
+                    <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#f1f5f9" />
                     <XAxis
                         dataKey="timestamp"
-                        stroke="#6b7280"
-                        tick={{ fill: '#6b7280', fontSize: 12 }}
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 600 }}
+                        dy={10}
                     />
                     <YAxis
-                        stroke="#6b7280"
-                        tick={{ fill: '#6b7280', fontSize: 12 }}
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 600 }}
                     />
                     <Tooltip
-                        contentStyle={{ backgroundColor: '#1a1d24', border: 'none', borderRadius: '8px', color: '#fff' }}
-                        itemStyle={{ color: '#14F195' }}
+                        contentStyle={{
+                            backgroundColor: '#0f172a',
+                            border: 'none',
+                            borderRadius: '12px',
+                            color: '#fff',
+                            boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
+                            padding: '12px'
+                        }}
+                        labelStyle={{ display: 'none' }}
+                        itemStyle={{ color: '#fff', fontSize: '12px', fontWeight: 'bold' }}
                     />
 
                     {maxTemp !== undefined && (
-                        <ReferenceLine y={maxTemp} stroke="#ef4444" strokeDasharray="3 3" label={{ position: 'insideTopLeft', value: 'Max', fill: '#ef4444', fontSize: 12 }} />
-                    )}
-                    {minTemp !== undefined && (
-                        <ReferenceLine y={minTemp} stroke="#3b82f6" strokeDasharray="3 3" label={{ position: 'insideBottomLeft', value: 'Min', fill: '#3b82f6', fontSize: 12 }} />
+                        <ReferenceLine y={maxTemp} stroke="#ef4444" strokeDasharray="4 4" label={{ position: 'right', value: '▲ MAX', fill: '#ef4444', fontSize: 8, fontWeight: 'bold', letterSpacing: '0.1em' }} />
                     )}
 
-                    <Line
+                    <Area
                         type="monotone"
                         dataKey="temperature"
-                        stroke="#14F195"
+                        stroke="#0052FF"
                         strokeWidth={3}
-                        dot={{ r: 4, fill: '#14F195', strokeWidth: 0 }}
-                        activeDot={{ r: 6, fill: '#fff' }}
-                        name="Temp (°C)"
+                        fillOpacity={1}
+                        fill="url(#colorTemp)"
+                        activeDot={{ r: 6, fill: '#0052FF', stroke: '#fff', strokeWidth: 2 }}
+                        name="Temperature (°C)"
                     />
-                    <Line
-                        type="monotone"
-                        dataKey="humidity"
-                        stroke="#9945FF"
-                        strokeWidth={3}
-                        dot={{ r: 4, fill: '#9945FF', strokeWidth: 0 }}
-                        name="Humidity (%)"
-                    />
-                </LineChart>
+                </AreaChart>
             </ResponsiveContainer>
         </div>
     );
